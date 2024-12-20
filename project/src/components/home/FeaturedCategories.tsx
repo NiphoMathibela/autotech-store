@@ -1,35 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Car, Gauge, Battery, Disc, Settings, Filter } from 'lucide-react';
+import { Car, Disc, Wrench, Battery, Settings, Flame, Fan, Package, ArrowRight } from 'lucide-react';
+import { categories } from '@/data/categories';
 
-const categories = [
-  { id: 'engine', name: 'Engine Parts', icon: Car, description: 'Complete engine parts and components' },
-  { id: 'performance', name: 'Performance', icon: Gauge, description: 'Performance upgrades and tuning parts' },
-  { id: 'electrical', name: 'Electrical', icon: Battery, description: 'Batteries, alternators, and electrical components' },
-  { id: 'brakes', name: 'Brakes', icon: Disc, description: 'Brake pads, rotors, and brake systems' },
-  { id: 'transmission', name: 'Transmission', icon: Settings, description: 'Transmission and drivetrain components' },
-  { id: 'filters', name: 'Filters', icon: Filter, description: 'Air, oil, and fuel filters' },
-];
+// Map category IDs to icons
+const categoryIcons = {
+  'engine-parts': Car,
+  'brakes': Disc,
+  'suspension': Wrench,
+  'electrical': Battery,
+  'transmission': Settings,
+  'exhaust': Flame,
+  'cooling': Fan,
+  'accessories': Package,
+};
 
 export function FeaturedCategories() {
   return (
-    <section className="py-16">
-      <div className="container">
-        <h2 className="mb-8 text-3xl font-bold text-primary">Shop by Category</h2>
+    <section className="bg-gray-50 py-16">
+      <div className="container mx-auto px-4">
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-3xl font-bold text-[#0a3042]">Shop by Category</h2>
+          <Link 
+            to="/categories" 
+            className="flex items-center text-[#64ee85] hover:underline"
+          >
+            View all categories
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </div>
+
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map(({ id, name, icon: Icon, description }) => (
-            <Link
-              key={id}
-              to={`/category/${id}`}
-              className="group rounded-lg border border-gray-200 bg-white p-6 transition-shadow hover:shadow-lg"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h3 className="mb-2 text-xl font-semibold text-primary">{name}</h3>
-              <p className="text-gray-600">{description}</p>
-            </Link>
-          ))}
+          {categories.slice(0, 6).map((category) => {
+            const Icon = categoryIcons[category.id] || Package;
+            return (
+              <Link
+                key={category.id}
+                to={`/categories/${category.id}`}
+                className="group rounded-lg border border-gray-200 bg-white p-6 transition-shadow hover:shadow-lg"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#64ee85]/10 text-[#64ee85] group-hover:bg-[#64ee85] group-hover:text-white">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-[#0a3042]">{category.name}</h3>
+                <p className="text-gray-600">{category.description}</p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

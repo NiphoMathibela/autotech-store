@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Search } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
+import logo from '../../assets/logo.png';
 
 export function Header() {
   const { items } = useCart();
@@ -21,7 +22,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="text-2xl font-bold text-[#0a3042]">
-            AutoTech Spares
+           <img src='../../assets/logo.png' alt="AutoTech" className="h-12 w-12" />
           </Link>
           
           <div className="hidden flex-1 items-center justify-center px-8 lg:flex">
