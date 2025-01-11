@@ -46,7 +46,7 @@ To run the server
 6. Run "npm install" to install dependencies
 7. Run "node server"
 
-##Usage
+## Usage
 
 Once the application is running, you can access it in your web browser at http://localhost:3000. You can browse products, add them to your cart, and proceed to checkout.
 Contributing
